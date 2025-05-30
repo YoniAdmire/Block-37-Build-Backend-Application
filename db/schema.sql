@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS recipes;
+
+CREATE TABLE recipes (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  instructions TEXT NOT NULL,
+  category VARCHAR(100),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE ingredients (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL UNIQUE,
+  recipe_id INTEGER REFERENCES recipes(id) ON DELETE CASCADE
+);
